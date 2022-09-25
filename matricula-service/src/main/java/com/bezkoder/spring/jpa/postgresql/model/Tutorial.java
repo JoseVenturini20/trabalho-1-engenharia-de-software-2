@@ -3,7 +3,7 @@ package com.bezkoder.spring.jpa.postgresql.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "estudantes", schema = "estudantes")
+@Table(name = "estudantes")
 public class Tutorial {
 
 	@Id
