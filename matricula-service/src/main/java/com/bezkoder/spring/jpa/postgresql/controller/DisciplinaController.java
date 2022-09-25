@@ -29,7 +29,7 @@ import com.bezkoder.spring.jpa.postgresql.repository.EstudanteRepository;
 public class DisciplinaController {
 	@Autowired
 	DisciplinaRepository disciplinaRepository;
-  @PostMapping("/test")
+  @PostMapping("/create")
   public ResponseEntity<Disciplina> createDisciplina(@RequestBody Disciplina estudante) {
     try {
       System.out.println(estudante.toString());
