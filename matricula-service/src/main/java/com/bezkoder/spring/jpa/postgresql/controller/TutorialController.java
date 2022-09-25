@@ -18,8 +18,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.bezkoder.spring.jpa.postgresql.model.Tutorial;
-import com.bezkoder.spring.jpa.postgresql.repository.TutorialRepository;
+import com.bezkoder.spring.jpa.postgresql.model.Disciplina;
+import com.bezkoder.spring.jpa.postgresql.model.Estudante;
+import com.bezkoder.spring.jpa.postgresql.repository.DisciplinaRepository;
+import com.bezkoder.spring.jpa.postgresql.repository.EstudanteRepository;
 
 @CrossOrigin(origins = "http://localhost:8081")
 @RestController
@@ -27,12 +29,13 @@ import com.bezkoder.spring.jpa.postgresql.repository.TutorialRepository;
 public class TutorialController {
 
 	@Autowired
-	TutorialRepository tutorialRepository;
+	EstudanteRepository tutorialRepository;
+	DisciplinaRepository disciplinaRepository;
 
 	@GetMapping("/tutorials")
-	public ResponseEntity<List<Tutorial>> getAllTutorials(@RequestParam(required = false) String nome) {
+	public ResponseEntity<List<Estudante>> getAllTutorials(@RequestParam(required = false) String nome) {
 		try {
-			List<Tutorial> tutorials = new ArrayList<Tutorial>();
+			List<Estudante> tutorials = new ArrayList<Estudante>();
 
 			if (nome == null)
 				tutorialRepository.findAll().forEach(tutorials::add);
@@ -50,8 +53,8 @@ public class TutorialController {
 	}
 
 	@GetMapping("/tutorials/{id}")
-	public ResponseEntity<Tutorial> getTutorialById(@PathVariable("id") long id) {
-		Optional<Tutorial> tutorialData = tutorialRepository.findById(id);
+	public ResponseEntity<Estudante> getTutorialById(@PathVariable("id") long id) {
+		Optional<Estudante> tutorialData = tutorialRepository.findById(id);
 
 		if (tutorialData.isPresent()) {
 			return new ResponseEntity<>(tutorialData.get(), HttpStatus.OK);
@@ -61,10 +64,21 @@ public class TutorialController {
 	}
 
 	@PostMapping("/tutorials")
-	public ResponseEntity<Tutorial> createTutorial(@RequestBody Tutorial tutorial) {
+	public ResponseEntity<Estudante> createTutorial(@RequestBody Estudante tutorial) {
 		try {
-			Tutorial _tutorial = tutorialRepository
-					.save(new Tutorial(tutorial.getNome(), tutorial.getEndereco()));
+			Estudante _tutorial = tutorialRepository
+					.save(new Estudante(tutorial.getNome(), tutorial.getEndereco()));
+			return new ResponseEntity<>(_tutorial, HttpStatus.CREATED);
+		} catch (Exception e) {
+			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+
+	@PostMapping("/test")
+	public ResponseEntity<Disciplina> createDisciplina(@RequestBody Disciplina tutorial) {
+		try {
+			Disciplina _tutorial = disciplinaRepository
+					.save(new Disciplina(tutorial.getCodigoDisciplina(), tutorial.getHorario(), tutorial.getNome(), tutorial.getTurma()));
 			return new ResponseEntity<>(_tutorial, HttpStatus.CREATED);
 		} catch (Exception e) {
 			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -72,11 +86,11 @@ public class TutorialController {
 	}
 
 	@PutMapping("/tutorials/{id}")
-	public ResponseEntity<Tutorial> updateTutorial(@PathVariable("id") long id, @RequestBody Tutorial tutorial) {
-		Optional<Tutorial> tutorialData = tutorialRepository.findById(id);
+	public ResponseEntity<Estudante> updateTutorial(@PathVariable("id") long id, @RequestBody Estudante tutorial) {
+		Optional<Estudante> tutorialData = tutorialRepository.findById(id);
 
 		if (tutorialData.isPresent()) {
-			Tutorial _tutorial = tutorialData.get();
+			Estudante _tutorial = tutorialData.get();
 			_tutorial.setNome(tutorial.getNome());
 			_tutorial.setEndereco(tutorial.getEndereco());
 			return new ResponseEntity<>(tutorialRepository.save(_tutorial), HttpStatus.OK);
