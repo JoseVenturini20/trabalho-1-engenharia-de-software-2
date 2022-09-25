@@ -1,5 +1,7 @@
 package com.bezkoder.spring.jpa.postgresql.model;
 
+import java.util.Set;
+
 import javax.persistence.*;
 
 @Entity
@@ -10,18 +12,19 @@ public class Matricula {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private long id;
 
-  @Column(name = "disciplina_id")
-	private long disciplina;
+  @ManyToOne()
+  private Disciplina disciplina;
+	
 
-  @Column(name = "estudante_id")
-	private long estudante;
+  @ManyToOne()
+	private Estudante estudante;
 
 	public Matricula() {
 
 	}
 
 
-	public Matricula(long disciplina, long estudante) {
+	public Matricula(Disciplina disciplina, Estudante estudante) {
     this.disciplina = disciplina;
     this.estudante = estudante;
   }
@@ -29,7 +32,7 @@ public class Matricula {
 
   @Override
 	public String toString() {
-		return "Tutorial [disciplina=" + disciplina + ", estudante=" + estudante + "]";
+		return "Tutorial [disciplina=" + disciplina.getCodigoDisciplina() + ", estudante=" + estudante.getMatricula() + "]";
 	}
 
 
@@ -38,22 +41,22 @@ public class Matricula {
   }
 
 
-  public long getDisciplina() {
+  public Disciplina getDisciplina() {
     return disciplina;
   }
 
 
-  public void setDisciplina(long disciplina) {
+  public void setDisciplina(Disciplina disciplina) {
     this.disciplina = disciplina;
   }
 
 
-  public long getEstudante() {
+  public Estudante getEstudante() {
     return estudante;
   }
 
 
-  public void setEstudante(long estudante) {
+  public void setEstudante(Estudante estudante) {
     this.estudante = estudante;
   }
 

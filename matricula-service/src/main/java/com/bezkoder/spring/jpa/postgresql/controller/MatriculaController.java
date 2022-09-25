@@ -39,7 +39,7 @@ public class MatriculaController {
   MatriculaRepository matriculaRepository;
 
 	@PostMapping("/matricula")
-	public ResponseEntity<List<Estudante>> addEstudanteDisciplina(@RequestBody(required = true) MatriculaReq matriculaReq) {
+	public ResponseEntity<Matricula> addEstudanteDisciplina(@RequestBody(required = true) MatriculaReq matriculaReq) {
 		try {
 			Estudante estudante = estudanteRepository.findById(matriculaReq.getMatriculaEstudante()).get();
 			if (estudante == null) {
@@ -50,12 +50,41 @@ public class MatriculaController {
 				return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 			}
       Matricula _matricula = matriculaRepository
-      .save(new Matricula(disciplina.getId(), estudante.getMatricula()));
-    return new ResponseEntity<>(HttpStatus.CREATED);
+      .save(new Matricula(disciplina, estudante));
+    return new ResponseEntity<>(_matricula, HttpStatus.CREATED);
 		} catch (Exception e) {
 			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
+  @GetMapping("/disciplinasByEstudante")
+	public ResponseEntity<List<Disciplina>> findDisciplinasByEstudante(@RequestParam("matricula") long matricula) {
+    try{
+      Estudante estudante = estudanteRepository.findById(matricula).get();
+      if (estudante == null) {
+				return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+			}
+      List<Disciplina> disciplinas = matriculaRepository.findByEstudante(estudante).stream().map(est -> est.getDisciplina()).toList();
+      return new ResponseEntity<>(disciplinas, HttpStatus.CREATED);
+    } catch (Exception e) {
 
+      System.out.println(e.toString());
+      return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+  }
+  @GetMapping("/estudanteByDisciplina")
+	public ResponseEntity<List<Estudante>> findDisciplinasByEstudante(@RequestParam("codigoDisciplina") String codigoDisciplina, @RequestParam("turma") int turma) {
+    try{
+      Disciplina disciplina = disciplinaRepository.findByCodigoDisciplinaAndTurma(codigoDisciplina, turma);
+      if (disciplina == null) {
+				return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+			}
+      List<Estudante> disciplinas = matriculaRepository.findByDisciplina(disciplina).stream().map(est -> est.getEstudante()).toList();
+      return new ResponseEntity<>(disciplinas, HttpStatus.CREATED);
+    } catch (Exception e) {
+
+      System.out.println(e.toString());
+      return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+  }
 
 }
