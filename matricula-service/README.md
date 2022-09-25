@@ -1,11 +1,13 @@
 # Matricula Service
 
 ## Inicializando o serviço
- `mvn spring-boot:run`
+ `mvn spring-boot:run` irá executar o serviço na porta 8080;
 
 ## API Documentation
+- **Rota Base** : http://localhost:8080
 - **POST** /api/disciplina/create
-   ```` {
+   ```` 
+       {
           "nome": "nomeString",
           "codigoDisciplina": "codigoString",
           "horario": "ABC",
