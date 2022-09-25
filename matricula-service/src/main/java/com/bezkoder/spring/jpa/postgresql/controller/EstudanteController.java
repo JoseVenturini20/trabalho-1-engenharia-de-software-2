@@ -68,7 +68,7 @@ public class EstudanteController {
 	public ResponseEntity<Estudante> createEstudante(@RequestBody Estudante estudante) {
 		try {
 			Estudante _estudante = estudanteRepository
-					.save(new Estudante(estudante.getNome(), estudante.getEndereco()));
+					.save(new Estudante(estudante.getNome(), estudante.getEndereco(), estudante.getDocumento()));
 			return new ResponseEntity<>(_estudante, HttpStatus.CREATED);
 		} catch (Exception e) {
 			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
