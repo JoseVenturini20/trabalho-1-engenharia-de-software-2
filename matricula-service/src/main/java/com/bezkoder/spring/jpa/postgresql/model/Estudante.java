@@ -17,19 +17,30 @@ public class Estudante {
 	@Column(name = "endereco")
 	private String endereco;
 
+	@Column(name = "documento")
+	private String documento;
+
 	public Estudante() {
 
 	}
 
-	public Estudante(String nome, String endereco) {
+	public Estudante(String nome, String endereco, String documento) {
 		this.nome = nome;
 		this.endereco = endereco;
+		this.documento = documento;
 	}
 
 	public long getMatricula() {
 		return matricula;
 	}
 
+	public String getDocumento() {
+		return documento;
+	}
+
+	public void setDocumento() {
+		this.documento = documento;
+	}
 
 	public String getNome() {
 		return nome;
