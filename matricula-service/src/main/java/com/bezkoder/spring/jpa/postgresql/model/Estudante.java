@@ -4,7 +4,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "estudantes")
-public class Tutorial {
+public class Estudante {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -17,19 +17,30 @@ public class Tutorial {
 	@Column(name = "endereco")
 	private String endereco;
 
-	public Tutorial() {
+	@Column(name = "documento")
+	private String documento;
+
+	public Estudante() {
 
 	}
 
-	public Tutorial(String nome, String endereco) {
+	public Estudante(String nome, String endereco, String documento) {
 		this.nome = nome;
 		this.endereco = endereco;
+		this.documento = documento;
 	}
 
 	public long getMatricula() {
 		return matricula;
 	}
 
+	public String getDocumento() {
+		return documento;
+	}
+
+	public void setDocumento() {
+		this.documento = documento;
+	}
 
 	public String getNome() {
 		return nome;
