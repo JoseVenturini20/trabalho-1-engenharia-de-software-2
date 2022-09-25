@@ -26,10 +26,11 @@ import com.bezkoder.spring.jpa.postgresql.repository.EstudanteRepository;
 @CrossOrigin(origins = "http://localhost:8081")
 @RestController
 @RequestMapping("/api")
-public class TutorialController {
+public class MatriculaController {
 
 	@Autowired
 	EstudanteRepository tutorialRepository;
+	@Autowired
 	DisciplinaRepository disciplinaRepository;
 
 	@GetMapping("/tutorials")
@@ -77,10 +78,12 @@ public class TutorialController {
 	@PostMapping("/test")
 	public ResponseEntity<Disciplina> createDisciplina(@RequestBody Disciplina tutorial) {
 		try {
+			System.out.println(tutorial.toString());
 			Disciplina _tutorial = disciplinaRepository
 					.save(new Disciplina(tutorial.getCodigoDisciplina(), tutorial.getHorario(), tutorial.getNome(), tutorial.getTurma()));
 			return new ResponseEntity<>(_tutorial, HttpStatus.CREATED);
 		} catch (Exception e) {
+			System.out.println(e.toString());
 			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
