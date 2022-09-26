@@ -26,7 +26,7 @@ import com.bezkoder.spring.jpa.postgresql.repository.DisciplinaRepository;
 import com.bezkoder.spring.jpa.postgresql.repository.EstudanteRepository;
 import com.bezkoder.spring.jpa.postgresql.repository.MatriculaRepository;
 
-@CrossOrigin(origins = "http://localhost:8081")
+@CrossOrigin(origins = "http://localhost:8080")
 @RestController
 @RequestMapping("/api/matricula")
 public class MatriculaController {
