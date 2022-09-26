@@ -1,31 +1,38 @@
-- /api/disciplina/create POST
-  - body:
-        {
+# Matricula Service
+
+## Inicializando o serviço
+ `mvn spring-boot:run` irá executar o serviço na porta 8080;
+
+## API Documentation
+- **Rota Base** : http://localhost:8080
+- **POST** /api/disciplina/create
+   ```` 
+       {
           "nome": "nomeString",
           "codigoDisciplina": "codigoString",
           "horario": "ABC",
           "turma": 1
         } 
-
-- /api/estudantes/create POST
-  - body:
+- **POST** /api/estudantes/create 
+  ````
         {
           "nome": "nomeAluno",
-          "endereco": "Rua BlaBla"
+          "endereco": "Rua BlaBla",
+          "documento": "1234"
         }
-- /api/estudantes GET
-- /api/estudantes?nome=abc GET
-- /api/estudantes/123 GET
-- /api/estudantes/123 PUT
-- /api/estudantes/123 DELETE
-- /api/estudantes/ALL DELETE
+- **GET** /api/estudantes 
+- **GET** /api/estudantes?nome=abc 
+- **GET** /api/estudantes/123 
+- **PUT** /api/estudantes/123 
+- **DELETE** /api/estudantes/123 
+- **DELETE** /api/estudantes/ALL 
 
-- /api/matricula/create POST
-  - body:
+- **POST** /api/matricula/create 
+  ````
         {
           "matriculaEstudante": "abc",
           "codigoDisciplina": "ajsdlas",
           "turma": 1
         }
-- /api/matricula/disciplinasByEstudante?matricula=123 GET
-- /api/matricula/estudantesByDisciplina?codigoDisciplina=abc&turma=1 GET
+- **GET** /api/matricula/disciplinasByEstudante?matricula=123 
+- **GET** /api/matricula/estudantesByDisciplina?codigoDisciplina=abc&turma=1 
