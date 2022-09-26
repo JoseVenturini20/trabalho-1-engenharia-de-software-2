@@ -1,7 +1,7 @@
 # Trabalho 1 - Engenharia de Software 2
 - Nome: José Francisco Dias Venturini
 - Nome: Alex Elias Guimarães Leite
-- Nome: Gustavo
+- Nome: Gustavo Sanford Bortolon
 
 ### Requisitos:
 - Docker
