@@ -20,15 +20,27 @@ public class Usuario {
 	@Column(name = "senha")
 	private String senha;
 
+	@Column(name = "logado",columnDefinition = "boolean default false")
+	private Boolean logado;
+
 	public Usuario() {
 
 	}
 
-	public Usuario(long id, String nome, String email, String senha) {
+	public Usuario(long id, String nome, String email, String senha, Boolean logado) {
 		this.id = id;
 		this.nome = nome;
 		this.email = email;
 		this.senha = senha;
+		this.logado = logado;
+	}
+
+	public Boolean getLogado() {
+		return logado;
+	}
+
+	public void setLogado(Boolean logado) {
+		this.logado = logado;
 	}
 
 	public String getNome() {
@@ -65,7 +77,7 @@ public class Usuario {
 
 	@Override
 	public String toString() {
-		return "Usuario [nome=" + nome + ", email=" + email + ", senha=" + senha + "]";
+		return "Usuario [nome=" + nome + ", email=" + email + ", senha=" + senha + ", logado =" + logado + "]";
 	}
 
 }
