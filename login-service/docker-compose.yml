@@ -1,9 +1,9 @@
 version: "3"
 
 services:
-  estudante:
+  login:
     build:
       dockerfile: Dockerfile
       context: ./
     ports:
-      - 8080:8080
+      - 8081:8081
