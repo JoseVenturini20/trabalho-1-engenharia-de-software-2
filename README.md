@@ -5,7 +5,7 @@
 
 ### Requisitos:
 - Docker
-- JAVA JDK
+- JAVA JDK 19
 - Maven
 
 ### Inicializar o Projeto:
