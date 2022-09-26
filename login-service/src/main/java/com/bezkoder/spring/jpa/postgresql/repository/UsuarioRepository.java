@@ -6,6 +6,4 @@ import com.bezkoder.spring.jpa.postgresql.model.Usuario;
 
 public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
   Usuario findByEmailAndSenha(String email, String senha);
-
-  Usuario findByEmail(String email);
 }
