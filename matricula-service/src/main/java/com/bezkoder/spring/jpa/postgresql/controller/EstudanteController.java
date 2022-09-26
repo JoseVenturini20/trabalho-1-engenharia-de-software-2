@@ -33,7 +33,7 @@ public class EstudanteController {
 	@Autowired
 	DisciplinaRepository disciplinaRepository;
 
-	@GetMapping("/")
+	@GetMapping("")
 	public ResponseEntity<List<Estudante>> getAllEstudantes(@RequestParam(required = false) String nome) {
 		try {
 			List<Estudante> estudantes = new ArrayList<Estudante>();
@@ -64,7 +64,7 @@ public class EstudanteController {
 		}
 	}
 
-	@PostMapping("/")
+	@PostMapping("/create")
 	public ResponseEntity<Estudante> createEstudante(@RequestBody Estudante estudante) {
 		try {
 			Estudante _estudante = estudanteRepository

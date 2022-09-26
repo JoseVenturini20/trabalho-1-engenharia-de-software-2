@@ -38,7 +38,7 @@ public class MatriculaController {
   @Autowired
   MatriculaRepository matriculaRepository;
 
-	@PostMapping("/matricula")
+	@PostMapping("/create")
 	public ResponseEntity<Matricula> addEstudanteDisciplina(@RequestBody(required = true) MatriculaReq matriculaReq) {
 		try {
 			Estudante estudante = estudanteRepository.findById(matriculaReq.getMatriculaEstudante()).get();
@@ -71,7 +71,7 @@ public class MatriculaController {
       return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
     }
   }
-  @GetMapping("/estudanteByDisciplina")
+  @GetMapping("/estudantesByDisciplina")
 	public ResponseEntity<List<Estudante>> findDisciplinasByEstudante(@RequestParam("codigoDisciplina") String codigoDisciplina, @RequestParam("turma") int turma) {
     try{
       Disciplina disciplina = disciplinaRepository.findByCodigoDisciplinaAndTurma(codigoDisciplina, turma);
