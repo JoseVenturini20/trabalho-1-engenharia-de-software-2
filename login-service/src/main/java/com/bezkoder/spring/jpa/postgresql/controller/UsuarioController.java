@@ -1,20 +1,14 @@
 package com.bezkoder.spring.jpa.postgresql.controller;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.bezkoder.spring.jpa.postgresql.model.ResponseUsuario;
@@ -34,11 +28,11 @@ public class UsuarioController {
 	@PostMapping("/registro")
 	public ResponseEntity<ResponseUsuario> createUsuario(@RequestBody Usuario usuario) {
 		try {
-			usuarioRepository
+			Usuario _usuario = usuarioRepository
 					.save(new Usuario(usuario.getId(), usuario.getNome(), usuario.getEmail(), usuario.getSenha(),
-							usuario.getLogado()));
-			ResponseUsuario _usuarioResponse = new ResponseUsuario(usuario.getEmail(), usuario.getNome(),
-					usuario.getLogado(), usuario.getId());
+							false));
+			ResponseUsuario _usuarioResponse = new ResponseUsuario(_usuario.getEmail(), _usuario.getNome(),
+					_usuario.getLogado(), _usuario.getId());
 			return new ResponseEntity<>(_usuarioResponse, HttpStatus.CREATED);
 		} catch (Exception e) {
 			return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
