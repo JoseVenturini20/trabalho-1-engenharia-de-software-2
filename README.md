@@ -6,7 +6,7 @@
 ### Requisitos:
 - Docker
 - JAVA JDK 19
-- Maven
+- Apache Maven 3.8.6
 
 ### Inicializar o Projeto:
  É **necassário** iniciar os bancos de dados antes da inicialização dos serviços. 
